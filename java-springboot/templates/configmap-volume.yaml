@@ -1,0 +1,11 @@
+{{- if hasKey .Values.config "envFrom" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "javaspringboot.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{- include "javaspringboot.labels" . | nindent 4 }}
+data:
+{{ toYaml .Values.config.volume | indent 2 }}
+{{- end }}

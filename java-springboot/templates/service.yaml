@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "javaspringboot.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+        {{- include "javaspringboot.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "javaspringboot.selectorLabels" . | nindent 4 }}
