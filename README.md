@@ -1,0 +1,1 @@
+ helm repo index . --url https://nicolas2lee.github.io/java-springboot-helm-chart

@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  javaspringboot:
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2020-06-23T23:10:59.778086+02:00"
+    description: A Helm chart for Kubernetes
+    digest: df047dce5d5c8391b5c6fd257992c496bca1bc608d33e74274aff6567e436f5a
+    name: javaspringboot
+    type: application
+    urls:
+    - https://nicolas2lee.github.io/java-springboot-helm-chart/javaspringboot-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-06-23T23:10:59.777204+02:00"
