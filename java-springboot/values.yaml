@@ -14,6 +14,7 @@ replicaCount: 1
 image:
   repository: de.icr.io/php-demo/laravel-nginx
   pullPolicy: Always
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
