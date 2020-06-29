@@ -35,8 +35,8 @@ config:
   envFrom:
   volume:
 
-secret:
-  ref: javaspringboot-secret
+#secret:
+#  ref: javaspringboot-secret
 
 serviceAccount:
   # Specifies whether a service account should be created
