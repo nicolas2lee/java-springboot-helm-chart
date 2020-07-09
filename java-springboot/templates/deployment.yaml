@@ -30,13 +30,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if hasKey .Values "secret" }}
           envFrom:
-            {{- if hasKey .Values "secret" }}
             - secretRef:
                 name: {{ .Values.secret.ref }}
-            {{- end }}
-            - configMapRef:
-                name: {{ include "javaspringboot.fullname" . }}
+          {{- end }}
+          volumeMounts:
+            - name: application-conf-volume
+              mountPath: /conf
           ports:
             - name: http
               containerPort: 8080
@@ -63,4 +64,8 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        - name: application-conf-volume
+          configMap:
+            name:  {{ include "javaspringboot.fullname" . }}
 
