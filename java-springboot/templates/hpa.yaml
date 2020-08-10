@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "javaspringboot.fullname" . }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "javaspringboot.fullname" . }}
+  minReplicas: {{ .Values.hpa.minReplicas }}
+  maxReplicas:  {{ .Values.hpa.maxReplicas }}
+  targetCPUUtilizationPercentage:  {{ .Values.hpa.targetCPUUtilizationPercentage }}
