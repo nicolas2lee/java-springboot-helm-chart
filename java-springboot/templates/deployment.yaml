@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ .Release.Name }}"
+  name: {{ include "javaspringboot.fullname" . }}
   namespace: {{ .Release.Namespace | quote }}
   labels:
     {{- include "javaspringboot.labels" . | nindent 4 }}
@@ -33,7 +33,7 @@ spec:
           {{- if hasKey .Values "secret" }}
           envFrom:
             - secretRef:
-                name: {{ .Values.secret.ref }}
+                name: {{ include "javaspringboot.fullname" . }}
           {{- end }}
           volumeMounts:
             - name: application-conf-volume
