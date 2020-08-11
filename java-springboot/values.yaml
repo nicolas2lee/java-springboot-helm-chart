@@ -100,7 +100,7 @@ hpa:
     cpu:
       targetAverageUtilization: 50
     memory:
-      targetAverageUtilization: 100Mi
+      targetAverageUtilization: 80
 
 podDisruptionBudget:
   minAvailable: 1
