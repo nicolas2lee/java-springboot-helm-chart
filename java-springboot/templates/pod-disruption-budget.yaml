@@ -1,0 +1,12 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "javaspringboot.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+  {{- include "javaspringboot.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ .Values.podDisruptionBudget.minAvailable}}
+  selector:
+    matchLabels:
+  {{- include "javaspringboot.labels" . | nindent 6 }}

@@ -1,7 +1,10 @@
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "javaspringboot.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels:
+  {{- include "javaspringboot.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -9,4 +12,16 @@ spec:
     name: {{ include "javaspringboot.fullname" . }}
   minReplicas: {{ .Values.hpa.minReplicas }}
   maxReplicas:  {{ .Values.hpa.maxReplicas }}
-  targetCPUUtilizationPercentage:  {{ .Values.hpa.targetCPUUtilizationPercentage }}
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: {{ .Values.hpa.metrics.cpu.targetAverageUtilization }}
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: {{ .Values.hpa.metrics.memory.targetAverageUtilization }}
